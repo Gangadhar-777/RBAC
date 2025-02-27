@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-auto">
+    @if (user()?.roles === "ROLE_STUDENT") {
+    <app-student-sidebar></app-student-sidebar>
+    } @if (user()?.roles === "ROLE_HR") {
+    <app-hr-sidebar></app-hr-sidebar>
+    } @if (user()?.roles === "ROLE_COLLEGE") {
+    <app-college-sidebar></app-college-sidebar>
+    } @if (user()?.roles === "ROLE_ADMIN") {
+    <app-admin-sidebar></app-admin-sidebar>
+    }
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>

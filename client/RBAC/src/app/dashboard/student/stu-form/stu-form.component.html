@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <form #form="ngForm" (ngSubmit)="onSubmitForm(form)">
+      <input
+        type="text"
+        name="name"
+        id=""
+        class="form-control my-2"
+        ngModel
+        required
+        placeholder="Enter name"
+      />
+      <input
+        type="number"
+        name="age"
+        id=""
+        class="form-control my-2"
+        ngModel
+        required
+        placeholder="Enter age"
+      />
+      <button class="btn btn-danger" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
