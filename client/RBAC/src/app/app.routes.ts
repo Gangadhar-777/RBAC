@@ -9,6 +9,9 @@ import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { authChildGuard, authGuard } from './guards/auth.guard';
 import { StuFormComponent } from './dashboard/student/stu-form/stu-form.component';
+import { JobsComponent } from './dashboard/hr/jobs/jobs.component';
+import { CreateJobComponent } from './dashboard/hr/create-job/create-job.component';
+import { AvJobsComponent } from './dashboard/student/av-jobs/av-jobs.component';
 
 export const routes: Routes = [
   {
@@ -29,11 +32,34 @@ export const routes: Routes = [
     canActivateChild: [authChildGuard],
     component: DashboardComponent,
     children: [
-      //Redirect based upon role (Implement it! -> Pending)
       {
         path: 'hr',
         component: HRComponent,
-        children: [],
+        children: [
+          {
+            path: '',
+            redirectTo: 'jobs',
+            pathMatch: 'full',
+          },
+          {
+            path: 'jobs',
+            component: JobsComponent,
+          },
+          {
+            path: 'create',
+            component: CreateJobComponent,
+            data: {
+              mode: 'create',
+            },
+          },
+          {
+            path: 'update/:id',
+            component: CreateJobComponent,
+            data: {
+              mode: 'update',
+            },
+          },
+        ],
       },
       {
         path: 'college',
@@ -46,12 +72,16 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'form',
+            redirectTo: 'jobs',
             pathMatch: 'full',
           },
           {
             path: 'form',
             component: StuFormComponent,
+          },
+          {
+            path: 'jobs',
+            component: AvJobsComponent,
           },
         ],
       },

@@ -21,6 +21,7 @@ export const authChildGuard: CanActivateChildFn = (route, state) => {
   const user = computed(() => authService.userDetails());
 
   const segment = route.url[route.url.length - 1]?.path;
+  console.log(route.url);
 
   if (segment === 'admin' && user()?.roles !== 'ROLE_ADMIN') {
     router.navigate(['/login']);

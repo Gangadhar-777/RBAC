@@ -15,14 +15,9 @@ export class StuFormComponent {
 
   onSubmitForm(form: NgForm) {
     console.log(form.value);
-    const token = JSON.parse(localStorage.getItem('token')!);
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+
     this.httpClient
-      .post('http://localhost:8081/students', form.value, {
-        headers,
-      })
+      .post('http://localhost:8081/students', form.value)
       .subscribe({
         next: (data) => {
           console.log(data);

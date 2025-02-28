@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-hr',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './hr.component.html',
-  styleUrl: './hr.component.css'
+  styleUrl: './hr.component.css',
 })
 export class HRComponent {
-
+  
 }

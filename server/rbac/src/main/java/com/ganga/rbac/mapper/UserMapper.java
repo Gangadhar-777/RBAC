@@ -16,6 +16,7 @@ import com.ganga.rbac.security.RegistrationRequest;
 @Mapper(componentModel = "spring", uses = { RoleMapper.class })
 public interface UserMapper {
     @Mapping(source = "roles", target = "roles", qualifiedByName = "rolesToString")
+    @Mapping(target = "username", expression = "java(user.getName())")
     UserDTO toDTO(User user);
 
     @Mapping(source = "roles", target = "roles", qualifiedByName = "stringToRoles")
@@ -23,6 +24,7 @@ public interface UserMapper {
 
     User toUserViaRegistration(RegistrationRequest request);
 
+    
     @Named("rolesToString")
     static String rolesToString(Set<Roles> roles) {
         return roles != null ? roles.stream().map(Roles::getName).collect(Collectors.joining(",")) : "";

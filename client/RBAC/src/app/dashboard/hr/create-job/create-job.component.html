@@ -1,0 +1,148 @@
+<form #jobForm="ngForm" (ngSubmit)="onSubmit(jobForm)" novalidate>
+  <!-- Title -->
+  <div class="my-3">
+    <label for="title">Enter Title</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      class="form-control"
+      [(ngModel)]="jobData.title"
+      #title="ngModel"
+      required
+      [ngClass]="{ 'is-invalid': title.invalid && title.touched }"
+    />
+    <div *ngIf="title.invalid && title.touched" class="text-danger">
+      Title is required.
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="my-3">
+    <label for="description">Enter Description</label>
+    <textarea
+      name="description"
+      id="description"
+      class="form-control"
+      [(ngModel)]="jobData.description"
+      #description="ngModel"
+      required
+      [ngClass]="{ 'is-invalid': description.invalid && description.touched }"
+    ></textarea>
+    <div *ngIf="description.invalid && description.touched" class="text-danger">
+      Description is required.
+    </div>
+  </div>
+
+  <!-- Company Name -->
+  <div class="my-3">
+    <label for="companyName">Company Name</label>
+    <input
+      type="text"
+      name="companyName"
+      id="companyName"
+      class="form-control"
+      [(ngModel)]="jobData.companyName"
+      #companyName="ngModel"
+      required
+      [ngClass]="{ 'is-invalid': companyName.invalid && companyName.touched }"
+    />
+    <div *ngIf="companyName.invalid && companyName.touched" class="text-danger">
+      Company name is required.
+    </div>
+  </div>
+
+  <!-- Location -->
+  <div class="my-3">
+    <label for="location">Location</label>
+    <input
+      type="text"
+      name="location"
+      id="location"
+      class="form-control"
+      [(ngModel)]="jobData.location"
+      #location="ngModel"
+      required
+      [ngClass]="{ 'is-invalid': location.invalid && location.touched }"
+    />
+    <div *ngIf="location.invalid && location.touched" class="text-danger">
+      Location is required.
+    </div>
+  </div>
+
+  <!-- Employment Type -->
+  <div class="my-3">
+    <label for="employmentType">Employment Type</label>
+    <select
+      name="employmentType"
+      id="employmentType"
+      class="form-select"
+      [(ngModel)]="jobData.employmentType"
+      #employmentType="ngModel"
+      required
+      [ngClass]="{
+        'is-invalid': employmentType.invalid && employmentType.touched
+      }"
+    >
+      <option value="" disabled selected>Select employment type</option>
+      <option value="Full-Time">Full Time</option>
+      <option value="Part-Time">Part Time</option>
+      <option value="Internship">Internship</option>
+      <option value="Contract">Contract</option>
+    </select>
+    <div
+      *ngIf="employmentType.invalid && employmentType.touched"
+      class="text-danger"
+    >
+      Employment type is required.
+    </div>
+  </div>
+
+  <!-- Salary -->
+  <div class="my-3">
+    <label for="salary">Enter Salary</label>
+    <input
+      type="number"
+      name="salary"
+      id="salary"
+      class="form-control"
+      [(ngModel)]="jobData.salary"
+      #salary="ngModel"
+      required
+      min="0"
+      [ngClass]="{ 'is-invalid': salary.invalid && salary.touched }"
+    />
+    <div *ngIf="salary.invalid && salary.touched" class="text-danger">
+      Salary must be a positive number.
+    </div>
+  </div>
+
+  <!-- Deadline -->
+  <div class="my-3">
+    <label for="deadline">Deadline</label>
+    <input
+      type="date"
+      name="deadline"
+      id="deadline"
+      class="form-control"
+      [(ngModel)]="jobData.deadline"
+      #deadline="ngModel"
+      required
+      [ngClass]="{ 'is-invalid': deadline.invalid && deadline.touched }"
+    />
+    <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
+      Deadline is required.
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="my-3">
+    <button
+      type="submit"
+      class="btn btn-danger"
+      [disabled]="jobForm.invalid || isLoading"
+    >
+      @if (id()) { update } @else { Submit }
+    </button>
+  </div>
+</form>

@@ -1,0 +1,12 @@
+@if (jobs().length > 0) { @for (job of jobs(); track $index) {
+<div class="card my-3">
+  <div class="card-body">
+    <p>{{ job.title }}</p>
+    <p>{{ job.description }}</p>
+    <hr />
+    <p>Posted By : {{ job.user?.username }}</p>
+  </div>
+</div>
+} } @else {
+<p>No Jobs available</p>
+}

@@ -52,6 +52,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/auth/**", "/actuator/**").permitAll()
                 .requestMatchers("/students/**").hasRole("STUDENT")
+                .requestMatchers("/hr/**").hasRole("HR")
                 .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

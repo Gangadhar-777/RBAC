@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ganga.rbac.dto.JobDTO;
+import com.ganga.rbac.mapper.JobMapper;
+import com.ganga.rbac.repo.JobRepository;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -24,7 +29,10 @@ class Student {
 
 @RestController
 @RequestMapping("/students")
+@RequiredArgsConstructor
 public class StudentController {
+    private final JobRepository jobRepository;
+    private final JobMapper jobMapper;
 
     @GetMapping
     public List<Student> getStudents() {
@@ -40,5 +48,10 @@ public class StudentController {
     public ResponseEntity<Student> postStudent(@RequestBody Student student) {
         System.out.println(student);
         return ResponseEntity.ok(student);
+    }
+
+    @GetMapping("/jobs")
+    public ResponseEntity<List<JobDTO>> getAllJobs() {
+        return ResponseEntity.ok(jobMapper.toListDTO(jobRepository.findAll()));
     }
 }

@@ -49,3 +49,34 @@ CREATE TABLE role_permissions (
 
 INSERT INTO roles(name)
 VALUES ("ADMIN"), ("HR"), ("STUDENT"), ("COLLEGE");
+
+CREATE TABLE Jobs (
+    job_id INT PRIMARY KEY AUTO_INCREMENT,
+    hr_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    company_name VARCHAR(255) NOT NULL,
+    location VARCHAR(255),
+    employment_type ENUM('Full-Time', 'Part-Time', 'Internship', 'Contract') NOT NULL,
+    salary DECIMAL(10,2) DEFAULT NULL,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deadline DATE,
+    FOREIGN KEY (hr_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+-- Optional: Job Applications Table (If students can apply)
+CREATE TABLE Job_Applications (
+    application_id INT PRIMARY KEY AUTO_INCREMENT,
+    job_id INT NOT NULL,
+    student_id INT NOT NULL,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('Pending', 'Accepted', 'Rejected') DEFAULT 'Pending',
+    FOREIGN KEY (job_id) REFERENCES Jobs(job_id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+INSERT INTO Permissions(name)
+VALUES ('CREATE_JOB'), ('EDIT_JOB'), ('VIEW_JOB');
+
+INSERT INTO role_permissions(role_id, permission_id)
+VALUES(2, 1), (2, 2), (2, 3), (3, 3);
